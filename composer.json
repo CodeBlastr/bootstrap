@@ -1,13 +1,5 @@
 {
-    "name": "elboletaire/twbs-cake-plugin",
-    "authors": [
-        {
-            "name": "Òscar Casajuana",
-            "email": "elboletaire@underave.net",
-            "homepage": "http://racotecnic.com",
-            "role": "Developer"
-        }
-    ],
+    "name": "codeblastr/bootstrap",
     "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php and less.js parsers, helpers and bake templates",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
@@ -20,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bootstrap\\": "src"
+            "CodeBlastr\\Users\\": "src"
         }
     }
 }
