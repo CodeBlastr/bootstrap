@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CodeBlastr\\Users\\": "src"
+            "CodeBlastr\\Bootstrap\\": "src"
         }
     }
 }
