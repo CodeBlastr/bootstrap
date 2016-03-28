@@ -10,3 +10,5 @@ Note to self, bake command...
 ```
 bin/cake bake template Users -p CodeBlastr/Users -t CodeBlastr/Bootstrap --prefix Dashboard
 ```
+
+test for updating packagist automatically
