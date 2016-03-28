@@ -1,7 +1,8 @@
 
 ###Forked primarily to edit the baking templates easily.  
 
-I can't think of a reason anyone would want to use this, please use : https://github.com/elboletaire/twbs-cake-plugin : instead. 
+I can't think of a reason anyone would want to use this. 
+You would probably want to use this instead : https://github.com/elboletaire/twbs-cake-plugin.
 
 Self Note : bake command...
 
