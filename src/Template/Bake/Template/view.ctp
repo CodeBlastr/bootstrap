@@ -54,30 +54,30 @@ $groupedFields = collection($fields)
 $groupedFields += ['number' => [], 'string' => [], 'boolean' => [], 'date' => [], 'text' => []];
 $pk = "\$$singularVar->{$primaryKey[0]}";
 %>
-<div class="actions columns col-lg-2 col-md-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="nav nav-stacked nav-pills">
-        <li><?= $this->Html->link(__('Edit <%= $singularHumanName %>'), ['action' => 'edit', <%= $pk %>]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete <%= $singularHumanName %>'), ['action' => 'delete', <%= $pk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $pk %>), 'class' => 'btn-danger']) ?> </li>
-        <li><?= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add']) ?> </li>
+
+<?php
+@$sidebar['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item']);
+@$sidebar['append'] .= $this->Html->link(__('Edit <%= $singularHumanName %>'), ['action' => 'edit', <%= $pk %>], ['class' => 'list-group-item']);
+@$sidebar['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
+@$sidebar['append'] .= $this->Form->postLink(__('Delete <%= $singularHumanName %>'), ['action' => 'delete', <%= $pk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $pk %>), 'class' => 'btn-danger list-group-item']);
 <%
     $done = [];
     foreach ($associations as $type => $data) {
         foreach ($data as $alias => $details) {
             if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
 %>
-        <li><?= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New <%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add']) ?> </li>
+        @$sidebar['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
+        @$sidebar['append'] .= $this->Html->link(__('New <%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
 <%
                 $done[] = $details['controller'];
             }
         }
     }
 %>
-    </ul>
-</div>
-<div class="<%= $pluralVar %> view col-lg-10 col-md-9 columns">
+
+$this->set('sidebar', $sidebar);
+?>
+<div class="<%= $pluralVar %> view columns">
     <h2><?= h($<%= $singularVar %>-><%= $displayField %>) ?></h2>
     <div class="row">
 <% if ($groupedFields['string']) : %>

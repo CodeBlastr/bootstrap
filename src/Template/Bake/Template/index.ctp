@@ -23,28 +23,31 @@ $fields = collection($fields)
     })
     ->take(7);
 %>
-<div class="actions columns col-lg-2 col-md-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="nav nav-stacked nav-pills">
-        <li><?= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add']) ?></li>
-        <li class="active disabled"><?= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index']) ?></li>
+
+
+<?php
+@$sidebar['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
+@$sidebar['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item active disabled']);
+
 <%
     $done = [];
     foreach ($associations as $type => $data):
         foreach ($data as $alias => $details):
             if ($details['controller'] != $this->name && !in_array($details['controller'], $done)):
 %>
-        <li><?= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New <%= $this->_singularHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add']) ?> </li>
+@$sidebar['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
+@$sidebar['append'] .= $this->Html->link(__('New <%= $this->_singularHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
 <%
                 $done[] = $details['controller'];
             endif;
         endforeach;
     endforeach;
 %>
-    </ul>
-</div>
-<div class="<%= $pluralVar %> index col-lg-10 col-md-9 columns">
+
+$this->set('sidebar', $sidebar);
+?>
+
+<div class="<%= $pluralVar %> index columns">
     <div class="table-responsive">
         <table class="table table-striped">
         <thead>
@@ -99,12 +102,5 @@ $fields = collection($fields)
         </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    <?= $this->element('Themes/Dashboard/paging') ?>
 </div>
