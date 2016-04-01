@@ -56,18 +56,18 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 %>
 
 <?php
-@$sidebar['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item']);
-@$sidebar['append'] .= $this->Html->link(__('Edit <%= $singularHumanName %>'), ['action' => 'edit', <%= $pk %>], ['class' => 'list-group-item']);
-@$sidebar['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
-@$sidebar['append'] .= $this->Form->postLink(__('Delete <%= $singularHumanName %>'), ['action' => 'delete', <%= $pk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $pk %>), 'class' => 'btn-danger list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('Edit <%= $singularHumanName %>'), ['action' => 'edit', <%= $pk %>], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Form->postLink(__('Delete <%= $singularHumanName %>'), ['action' => 'delete', <%= $pk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $pk %>), 'class' => 'btn-danger list-group-item']);
 <%
     $done = [];
     foreach ($associations as $type => $data) {
         foreach ($data as $alias => $details) {
             if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
 %>
-        @$sidebar['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
-        @$sidebar['append'] .= $this->Html->link(__('New <%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
+        @$contextMenu['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
+        @$contextMenu['append'] .= $this->Html->link(__('New <%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
 <%
                 $done[] = $details['controller'];
             }
@@ -75,7 +75,7 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
     }
 %>
 
-$this->set('sidebar', $sidebar);
+$this->set('contextMenu', $contextMenu);
 ?>
 <div class="<%= $pluralVar %> view columns">
     <h2><?= h($<%= $singularVar %>-><%= $displayField %>) ?></h2>

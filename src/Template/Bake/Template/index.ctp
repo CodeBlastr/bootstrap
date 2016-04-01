@@ -26,8 +26,8 @@ $fields = collection($fields)
 
 
 <?php
-@$sidebar['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
-@$sidebar['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item active disabled']);
+@$contextMenu['append'] .= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add'], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index'], ['class' => 'list-group-item active disabled']);
 
 <%
     $done = [];
@@ -35,8 +35,8 @@ $fields = collection($fields)
         foreach ($data as $alias => $details):
             if ($details['controller'] != $this->name && !in_array($details['controller'], $done)):
 %>
-@$sidebar['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
-@$sidebar['append'] .= $this->Html->link(__('New <%= $this->_singularHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index'], ['class' => 'list-group-item']);
+@$contextMenu['append'] .= $this->Html->link(__('New <%= $this->_singularHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add'], ['class' => 'list-group-item']);
 <%
                 $done[] = $details['controller'];
             endif;
@@ -44,7 +44,7 @@ $fields = collection($fields)
     endforeach;
 %>
 
-$this->set('sidebar', $sidebar);
+$this->set('contextMenu', $contextMenu);
 ?>
 
 <div class="<%= $pluralVar %> index columns">
