@@ -13,8 +13,8 @@
     <div class="list-group-item <?= @$_GET['role'] === 'customer' || @$_GET['equals']['role'] === 'customer' ? 'active' : null; ?>">
         <a href="#collapseThree" data-toggle="collapse"> <span class="glyphicon glyphicon-user"></span> Customers <span class="caret"></span></a>
         <ul id="collapseThree" class="collapse <?= @$_GET['role'] === 'customer' || @$_GET['equals']['role'] === 'customer' ? 'in' : null; ?> list-unstyled">
-            <li><?= $this->Html->link(__('Customer List'), ['plugin' => 'CodeBlastr/Users', 'controller' => 'users', 'action' => 'index', '?' => ['filter' => 'equals', 'equals' => ['role' => 'customer']]]); ?></li>
-            <li><?= $this->Html->link(__('Add Customer'), ['plugin' => 'CodeBlastr/Users', 'controller' => 'users', 'action' => 'add', '?' => ['role' => 'customer']]); ?></li>
+            <li><?= $this->Html->link(__('Customer List'), ['plugin' => 'CodeBlastrUsers', 'controller' => 'users', 'action' => 'index', '?' => ['filter' => 'equals', 'equals' => ['role' => 'customer']]]); ?></li>
+            <li><?= $this->Html->link(__('Add Customer'), ['plugin' => 'CodeBlastrUsers', 'controller' => 'users', 'action' => 'add', '?' => ['role' => 'customer']]); ?></li>
         </ul>
     </div>
 <?php endif; ?>

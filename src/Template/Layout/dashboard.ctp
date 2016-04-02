@@ -50,9 +50,9 @@ $this->prepend('script', $this->Html->script([
         echo $this->fetch('meta');
 
         // Styles
-        echo $this->Less->less('Booty.less/styles.less'); // was the default // echo $this->Less->less(['Bootstrap.less/bootstrap.less' /* 'Bootstrap.less/cakephp/styles.less' */]);
+        echo $this->Less->less('CodeBlastrBootstrap.less/styles.less'); // was the default // echo $this->Less->less(['Bootstrap.less/bootstrap.less' /* 'Bootstrap.less/cakephp/styles.less' */]);
         echo $this->fetch('css');
-        echo $this->Html->css('../CodeBlastr/Bootstrap/css/dashboard.css');
+        echo $this->Html->css('CodeBlastrBootstrap.dashboard.css');
 
         // Sometimes we'll want to send scripts to the top (rarely..)
         echo $this->fetch('script.top');
@@ -115,7 +115,7 @@ $this->prepend('script', $this->Html->script([
             </div>
             <div class="col-lg-2 col-md-2 col-sm-3 col-md-pull-10 col-sm-pull-9 sidebar-nav">
                 <div class="list-group">
-                    <?php echo $this->element('Themes/Dashboard/sidebar'); ?>
+                    <?php echo $this->element('CodeBlastrBootstrap.Dashboard/sidebar'); ?>
                 </div>
             </div>
         </div>

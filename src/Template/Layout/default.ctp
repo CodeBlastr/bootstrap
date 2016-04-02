@@ -59,8 +59,8 @@ $this->prepend('script', $this->Html->script([
         echo $this->fetch('script.top');
     ?>
 </head>
-<body>
-    <header role="banner" class="navbar navbar-inverse">
+<body data-layout="CodeBlastrBootstrap/Layout/default">
+    <header role="banner" class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <?php if ($this->fetch('navbar.top')): ?>
@@ -85,6 +85,7 @@ $this->prepend('script', $this->Html->script([
     <div class="container">
         <div id="content" class="row">
             <?= $this->Flash->render(); ?>
+            <p>File : CodeBlastrBootstrap/Layout/default</p>
             <?= $this->fetch('content'); ?>
         </div>
     </div>

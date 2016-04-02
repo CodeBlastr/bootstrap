@@ -8,7 +8,7 @@ You would probably want to use this instead : https://github.com/elboletaire/twb
 Note to self, bake command...
 
 ```
-bin/cake bake template Users -p CodeBlastr/Users -t CodeBlastr/Bootstrap --prefix Dashboard
+bin/cake bake template Users -p CodeBlastrUsers -t CodeBlastrBootstrap --prefix Dashboard
 ```
 
 test for updating packagist automatically
