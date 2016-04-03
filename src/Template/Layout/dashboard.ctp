@@ -86,15 +86,7 @@ $this->prepend('script', $this->Html->script([
                             </div>
                         </form>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Username <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="themes">
-                            <li><a href="#">link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">link 2</a></li>
-                            <li><a href="/logout">Logout</a></li>
-                        </ul>
-                    </li>
+                    <?= $this->element('Navigation/username') ?>
                     <li>
                         <a href="#">Help</a>
                     </li>

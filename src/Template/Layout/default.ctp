@@ -45,47 +45,58 @@ $this->prepend('script', $this->Html->script([
         <?= $this->fetch('title'); ?>
     </title>
     <?php
-        // Meta
-        echo $this->fetch('meta');
+    // Meta
+    echo $this->fetch('meta');
 
-        // Styles
-        echo $this->Less->less([
-            'Bootstrap.less/bootstrap.less'
-            // 'Bootstrap.less/cakephp/styles.less'
-        ]);
-        echo $this->fetch('css');
+    // Styles
+    echo $this->Less->less('CodeBlastrBootstrap.less/styles.less'); // was the default // echo $this->Less->less(['Bootstrap.less/bootstrap.less' /* 'Bootstrap.less/cakephp/styles.less' */]);
+    echo $this->fetch('css');
+    echo $this->Html->css('CodeBlastrBootstrap.dashboard.css');
 
-        // Sometimes we'll want to send scripts to the top (rarely..)
-        echo $this->fetch('script.top');
+    // Sometimes we'll want to send scripts to the top (rarely..)
+    echo $this->fetch('script.top');
     ?>
 </head>
 <body data-layout="CodeBlastrBootstrap/Layout/default">
-    <header role="banner" class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
+    <header class="navbar navbar-default navbar-static-top navbar-inverse">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <?php if ($this->fetch('navbar.top')): ?>
-                <button data-target="#navbar-top" data-toggle="collapse" type="button" class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
+                <a href="../" class="navbar-brand"><?= Configure::read('App.name'); ?></a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <?php endif; ?>
-                <?= $this->Html->link(Configure::read('App.name'), '/', ['class' => 'navbar-brand']); ?>
             </div>
-            <?php if ($this->fetch('navbar.top')): ?>
-            <nav role="navigation" class="collapse navbar-collapse" id="navbar-top">
-                <ul class="nav navbar-nav">
-                    <?= $this->fetch('navbar.top'); ?>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <form class="navbar-form navbar-left visible-xs" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="" class="search-form hidden-xs">
+                            <div class="form-group has-feedback">
+                                <label for="search" class="sr-only">Search</label>
+                                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </form>
+                    </li>
+                    <?= $this->element('Navigation/username') ?>
+                    <li>
+                        <a href="#">Help</a>
+                    </li>
                 </ul>
-            </nav>
-            <?php endif; ?>
+
+            </div>
         </div>
     </header>
     <div class="container">
         <div id="content" class="row">
             <?= $this->Flash->render(); ?>
-            <p>File : CodeBlastrBootstrap/Layout/default</p>
             <?= $this->fetch('content'); ?>
         </div>
     </div>
