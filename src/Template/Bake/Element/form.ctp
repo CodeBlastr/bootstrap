@@ -78,6 +78,6 @@ $this->set('contextMenu', $contextMenu);
 %>
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit'), ['class' => 'btn-success']) ?>
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn-primary']) ?>
     <?= $this->Form->end() ?>
 </div>
