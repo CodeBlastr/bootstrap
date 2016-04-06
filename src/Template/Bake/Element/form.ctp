@@ -39,45 +39,47 @@ $pk = "\${$singularVar}->{$primaryKey[0]}";
 $this->set('contextMenu', $contextMenu);
 ?>
 
-<div class="<%= $pluralVar %> form columns">
-    <?= $this->Form->create($<%= $singularVar %>); ?>
-    <fieldset>
-        <legend><?= __('<%= Inflector::humanize($action) %> <%= $singularHumanName %>') ?></legend>
-        <?php
+<div class="<%= $pluralVar %> form columns row">
+    <div class="col-sm-8">
+        <?= $this->Form->create($<%= $singularVar %>); ?>
+        <fieldset>
+            <legend><?= __('<%= Inflector::humanize($action) %> <%= $singularHumanName %>') ?></legend>
+            <?php
 <%
-        foreach ($fields as $field) {
-            if (in_array($field, $primaryKey)) {
-                continue;
-            }
-            if (isset($keyFields[$field])) {
-                $fieldData = $schema->column($field);
-                if (!empty($fieldData['null'])) {
+            foreach ($fields as $field) {
+                if (in_array($field, $primaryKey)) {
+                    continue;
+                }
+                if (isset($keyFields[$field])) {
+                    $fieldData = $schema->column($field);
+                    if (!empty($fieldData['null'])) {
 %>
-            echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>, 'empty' => true]);
+                echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>, 'empty' => true]);
 <%
-                } else {
+                    } else {
 %>
-            echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>]);
+                echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>]);
+<%
+                    }
+                    continue;
+                }
+                if (!in_array($field, ['created', 'modified', 'updated'])) {
+%>
+                echo $this->Form->input('<%= $field %>');
 <%
                 }
-                continue;
             }
-            if (!in_array($field, ['created', 'modified', 'updated'])) {
+            if (!empty($associations['BelongsToMany'])) {
+                foreach ($associations['BelongsToMany'] as $assocName => $assocData) {
 %>
-            echo $this->Form->input('<%= $field %>');
+                echo $this->Form->input('<%= $assocData['property'] %>._ids', ['options' => $<%= $assocData['variable'] %>]);
 <%
+                }
             }
-        }
-        if (!empty($associations['BelongsToMany'])) {
-            foreach ($associations['BelongsToMany'] as $assocName => $assocData) {
 %>
-            echo $this->Form->input('<%= $assocData['property'] %>._ids', ['options' => $<%= $assocData['variable'] %>]);
-<%
-            }
-        }
-%>
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit'), ['class' => 'btn-primary']) ?>
-    <?= $this->Form->end() ?>
+            ?>
+        </fieldset>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn-primary']) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>
