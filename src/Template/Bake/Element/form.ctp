@@ -40,7 +40,7 @@ $this->set('contextMenu', $contextMenu);
 ?>
 
 <div class="<%= $pluralVar %> form columns row">
-    <div class="col-sm-8">
+    <div class="col-sm-7">
         <?= $this->Form->create($<%= $singularVar %>); ?>
         <fieldset>
             <legend><?= __('<%= Inflector::humanize($action) %> <%= $singularHumanName %>') ?></legend>
