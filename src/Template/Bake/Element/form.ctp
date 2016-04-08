@@ -44,7 +44,6 @@ $this->set('contextMenu', $contextMenu);
         <?= $this->Form->create($<%= $singularVar %>); ?>
         <fieldset>
             <legend><?= __('<%= Inflector::humanize($action) %> <%= $singularHumanName %>') ?></legend>
-            <?php
 <%
             foreach ($fields as $field) {
                 if (in_array($field, $primaryKey)) {
@@ -54,25 +53,25 @@ $this->set('contextMenu', $contextMenu);
                     $fieldData = $schema->column($field);
                     if (!empty($fieldData['null'])) {
 %>
-                echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>, 'empty' => true]);
+                <?= $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>, 'empty' => true]) ?>
 <%
                     } else {
 %>
-                echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>]);
+                <?= $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>]) ?>
 <%
                     }
                     continue;
                 }
                 if (!in_array($field, ['created', 'modified', 'updated'])) {
 %>
-                echo $this->Form->input('<%= $field %>');
+                <?= $this->Form->input('<%= $field %>') ?>
 <%
                 }
             }
             if (!empty($associations['BelongsToMany'])) {
                 foreach ($associations['BelongsToMany'] as $assocName => $assocData) {
 %>
-                echo $this->Form->input('<%= $assocData['property'] %>._ids', ['options' => $<%= $assocData['variable'] %>]);
+                <?= $this->Form->input('<%= $assocData['property'] %>._ids', ['options' => $<%= $assocData['variable'] %>]) ?>
 <%
                 }
             }
